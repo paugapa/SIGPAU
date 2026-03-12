@@ -1,0 +1,727 @@
+<?php
+session_start();
+require_once 'db_connect.php';
+
+// Handle review submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_review']) && isset($_SESSION['username'])) {
+    $content = $_POST['review_content'] ?? '';
+    if (!empty($content) && $pdo) {
+        $stmt = $pdo->prepare("INSERT INTO reviews (username, content) VALUES (?, ?)");
+        $stmt->execute([$_SESSION['username'], $content]);
+        header("Location: index.php#reviews");
+        exit;
+    }
+}
+
+// Fetch reviews
+$reviews = [];
+if ($pdo) {
+    try {
+        $stmt = $pdo->query("SELECT * FROM reviews ORDER BY created_at DESC");
+        $reviews = $stmt->fetchAll();
+    } catch (PDOException $e) {
+        $reviews = [];
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGPAU - Sistema Integral de Gestión y Provisión Automática de Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="styles_improved.css" rel="stylesheet">
+    <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm navbar-custom" id="mainNav">
+    <div class="container-fluid px-4">
+        <div class="navbar-logo-placeholder">
+            <img src="logo.png" alt="SIGPAU Logo" class="navbar-logo" onload="this.style.opacity='1';" onerror="this.style.display='none';" style="opacity:0; transition: opacity 0.3s ease;">
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#home">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#solucion">Solución</a></li>
+                <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+                <li class="nav-item"><a class="nav-link" href="#mercado">Mercado</a></li>
+                <li class="nav-item"><a class="nav-link" href="#demanda">Demanda</a></li>
+                <li class="nav-item"><a class="nav-link" href="#caracteristicas">Características Técnicas</a></li>
+                <li class="nav-item"><a class="nav-link" href="#reviews">Reseñas</a></li>
+                <li class="nav-item"><a class="nav-link" href="#cta">Contacto</a></li>
+                <?php if (isset($_SESSION['username'])): ?>
+                    <li class="nav-item"><span class="nav-link text-warning">Hola, <?php echo htmlspecialchars($_SESSION['username']); ?></span></li>
+                    <li class="nav-item"><a class="nav-link btn btn-outline-danger btn-sm ms-2" href="logout.php">Salir</a></li>
+                <?php else: ?>
+                    <li class="nav-item"><a class="nav-link btn btn-outline-primary btn-sm ms-2" href="login.php">Iniciar Sesión</a></li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<header id="home" class="hero-section d-flex align-items-center justify-content-center text-white text-center">
+    <div class="hero-gradient-overlay"></div>
+    <div class="container position-relative z-2">
+        <div class="hero-content">
+            <h1 class="display-2 fw-bold animate__animated animate__fadeInDown animate__delay-0-2s">SIGPAU</h1>
+            <p class="lead fs-4 mt-3 animate__animated animate__fadeInUp animate__delay-0-4s">
+                Sistema Integral de Gestión y Provisión Automática de Usuarios
+            </p>
+            <p class="subtitle mt-3 animate__animated animate__fadeInUp animate__delay-0-6s">
+                Soluciones de ciberseguridad y gestión IT para PYMEs basadas en open-source
+            </p>
+            <div class="mt-5 animate__animated animate__fadeInUp animate__delay-0-8s">
+                <a href="#solucion" class="btn btn-primary btn-lg me-3 btn-glow">Descubre la Solución</a>
+                <a href="#cta" class="btn btn-outline-light btn-lg">Contacta con Nosotros</a>
+            </div>
+        </div>
+    </div>
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+</header>
+
+<!-- SECCIÓN SOLUCIÓN -->
+<section id="solucion" class="py-5 section-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="animate__animated animate__fadeInLeft" data-animate>
+                    <h2 class="display-5 fw-bold mb-4">Solución que aporta SIGPAU al mercado</h2>
+                    <p class="lead mb-4">
+                        Con SIGPAU, hemos creado un sistema integral de gestión y provisión automática de usuarios basado en herramientas open-source que resuelve varios problemas clave en la gestión de redes y servicios IT para PYMEs y entornos educativos.
+                    </p>
+                    <div class="feature-highlight">
+                        <ul class="list-unstyled">
+                            <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> <strong>Automatización integral</strong> de gestión de usuarios</li>
+                            <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> <strong>Ciberseguridad avanzada</strong> con 2FA y auditorías</li>
+                            <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> <strong>Reducción de costes</strong> hasta 50% operativos</li>
+                            <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> <strong>Escalabilidad</strong> para entornos híbridos</li>
+                            <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> <strong>Modelo de negocio B2B</strong> Business to Business </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+          <div class="col-lg-6">
+  <div class="video-container animate__animated animate__fadeInRight" data-animate>
+    <iframe 
+      width="100%" 
+      height="315" 
+      src="https://www.youtube.com/embed/54FmNlleHLY" 
+      title="YouTube video player" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN SERVICIOS DETALLADOS -->
+<section id="servicios" class="py-5 section-services">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3 text-white animate__animated animate__fadeInUp" data-animate>
+                Servicios Clave de SIGPAU
+            </h2>
+            <p class="lead text-white animate__animated animate__fadeInUp animate__delay-0-2s">
+                Soluciones integrales para cada aspecto de tu infraestructura IT
+            </p>
+        </div>
+        <!-- Gestión de Redes -->
+        <div class="service-category mb-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="service-content animate__animated animate__fadeInLeft" data-animate>
+                        <div class="service-icon-wrapper">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3 class="fw-bold mb-3 text-white">Gestión de Redes y Arquitectura</h3>
+                        <p class="mb-3 text-white">
+                            Implementamos arquitecturas de red robustas y seguras diseñadas para crecer con tu organización.
+                        </p>
+                        <ul class="service-list">
+                            <li class="text-white"><strong>Diseño de Arquitectura de Red:</strong> Implementación de VLANs y gateways OpenWRT para segmentación eficiente</li>
+                            <li class="text-white"><strong>Servidor DNS Local:</strong> Configuración de resolución de nombres rápida y segura</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="service-card-visual glass-effect animate__animated animate__fadeInRight" data-animate>
+                        <div class="service-visual-icon">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Seguridad y Autenticación -->
+        <div class="service-category mb-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+                    <div class="service-content animate__animated animate__fadeInRight" data-animate>
+                        <div class="service-icon-wrapper">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="fw-bold mb-3 text-white">Seguridad y Autenticación</h3>
+                        <p class="mb-3 text-white">
+                            Protege tu infraestructura con múltiples capas de seguridad y autenticación centralizada.
+                        </p>
+                        <ul class="service-list">
+                            <li class="text-white"><strong>Autenticación Centralizada:</strong> LDAP y Kerberos para gestión unificada de usuarios</li>
+                            <li class="text-white"><strong>Autenticación de Doble Factor:</strong> Google Authenticator para acceso seguro</li>
+                            <li class="text-white"><strong>Política de Contraseñas:</strong> Cambios regulares y cumplimiento de estándares</li>
+                            <li class="text-white"><strong>Auditoría y Trazabilidad:</strong> Registro automático de intentos de acceso con informes PDF/HTML</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="service-card-visual glass-effect animate__animated animate__fadeInLeft" data-animate>
+                        <div class="service-visual-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Gestión de Datos -->
+        <div class="service-category mb-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="service-content animate__animated animate__fadeInLeft" data-animate>
+                        <div class="service-icon-wrapper">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3 class="fw-bold mb-3 text-white">Gestión de Datos y Aplicaciones</h3>
+                        <p class="mb-3 text-white">
+                            Administra tus datos y aplicaciones con seguridad y eficiencia.
+                        </p>
+                        <ul class="service-list">
+                            <li class="text-white"><strong>Base de Datos SQL:</strong> Configuración con datos de prueba listos para integración</li>
+                            <li class="text-white"><strong>Página Web Interna:</strong> Desarrollo de portal corporativo con acceso restringido</li>
+                            <li class="text-white"><strong>Compartición de Carpetas (Samba):</strong> Colaboración segura por departamento</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="service-card-visual glass-effect animate__animated animate__fadeInRight" data-animate>
+                        <div class="service-visual-icon">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Automatización y Recuperación -->
+        <div class="service-category mb-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+                    <div class="service-content animate__animated animate__fadeInRight" data-animate>
+                        <div class="service-icon-wrapper">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="fw-bold mb-3 text-white">Automatización y Recuperación</h3>
+                        <p class="mb-3 text-white">
+                            Automatiza procesos críticos y garantiza la continuidad del negocio.
+                        </p>
+                        <ul class="service-list">
+                            <li class="text-white"><strong>Copias de Seguridad Automatizadas:</strong> Protección de datos y servicios críticos</li>
+                            <li class="text-white"><strong>Imágenes del Sistema:</strong> Recuperación rápida ante eventualidades</li>
+                            <li class="text-white"><strong>Script de Restauración:</strong> Verificación automática y reinicio de servicios con informes de estado</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="service-card-visual glass-effect animate__animated animate__fadeInLeft" data-animate>
+                        <div class="service-visual-icon">
+                            <i class="fas fa-redo"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Monitorización y Alertas -->
+        <div class="service-category">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="service-content animate__animated animate__fadeInLeft" data-animate>
+                        <div class="service-icon-wrapper">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="fw-bold mb-3 text-white">Monitorización y Alertas</h3>
+                        <p class="mb-3 text-white">
+                            Supervisa tu infraestructura 24/7 con alertas en tiempo real.
+                        </p>
+                        <ul class="service-list">
+                            <li class="text-white"><strong>Monitorización de Red (Zabbix):</strong> Supervisión proactiva de servicios</li>
+                            <li class="text-white"><strong>Pantalla de Monitorización en Tiempo Real:</strong> Ping de servidores, tráfico VLAN, usuarios conectados</li>
+                            <li class="text-white"><strong>Bot de Telegram:</strong> Notificaciones instantáneas de nuevas conexiones</li>
+                            <li class="text-white"><strong>Gestión de Accesos:</strong> Control de usuarios invitados y subcontratistas</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="service-card-visual glass-effect animate__animated animate__fadeInRight" data-animate>
+                        <div class="service-visual-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN MERCADO -->
+<section id="mercado" class="py-5 section-dark">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5 text-white animate__animated animate__fadeInUp" data-animate>
+            Respuesta a las Tendencias del Mercado
+        </h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card card-market animate__animated animate__fadeInUp glass-effect" data-animate>
+                    <div class="card-icon-wrapper bg-primary">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold text-primary">Automatización de Redes</h5>
+                        <p class="card-text small text-white">
+                            80% de brechas de seguridad provienen de errores humanos
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card card-market animate__animated animate__fadeInUp animate__delay-0-2s glass-effect" data-animate>
+                    <div class="card-icon-wrapper bg-success">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold text-primary">Ciberseguridad para PYMEs</h5>
+                        <p class="card-text small text-white">
+                            43% de PYMEs sufren ciberataques
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card card-market animate__animated animate__fadeInUp animate__delay-0-4s glass-effect" data-animate>
+                    <div class="card-icon-wrapper bg-info">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold text-primary">Servicios IT en Europa</h5>
+                        <p class="card-text small text-white">
+                            Déficit de 500.000 profesionales ICT
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card card-market animate__animated animate__fadeInUp animate__delay-0-6s glass-effect" data-animate>
+                    <div class="card-icon-wrapper bg-warning">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold text-primary">Consultoría en Redes</h5>
+                        <p class="card-text small text-white">
+                            Soluciones open-source con márgenes 20-30%
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN DEMANDA -->
+<section id="demanda" class="py-5 section-light">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5 animate__animated animate__fadeInUp" data-animate>
+            Alineación con la Demanda del Mercado
+        </h2>
+        <div class="row g-4">
+            <div class="col-lg-4 mb-4">
+                <div class="segment-card shadow-sm animate__animated animate__fadeInUp" data-animate>
+                    <div class="segment-icon bg-primary">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h4 class="fw-bold mt-3 mb-3">PYMEs (50-250 empleados)</h4>
+                    <p class="mb-3">
+                        El 66% de las PYMEs buscan redes seguras, escalables y asequibles.
+                    </p>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Infraestructura virtual OpenWRT/VLANs</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> SaaS €500-€2.000/mes</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Monitorización LibreNMS/The Dude</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Bots Telegram para alertas</li>
+                    </ul>
+                    <div class="potential-box mt-4">
+                        <strong class="text-primary">Potencial:</strong>
+                        <p class="mb-0 small">€5-10 millones en 3 años</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="segment-card shadow-sm animate__animated animate__fadeInUp animate__delay-0-2s" data-animate>
+                    <div class="segment-icon bg-success">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="fw-bold mt-3 mb-3">Entornos Educativos</h4>
+                    <p class="mb-3">
+                        Demanda de simulaciones realistas para formación técnica.
+                    </p>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Entorno pruebas ASIX</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> 2.000 centros FP España</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Open-source para startups</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Escalable a Europa</li>
+                    </ul>
+                    <div class="potential-box mt-4">
+                        <strong class="text-success">Alcance:</strong>
+                        <p class="mb-0 small">Formación profesional europea</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="segment-card shadow-sm animate__animated animate__fadeInUp animate__delay-0-4s" data-animate>
+                    <div class="segment-icon bg-warning">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h4 class="fw-bold mt-3 mb-3">Sectores Clave</h4>
+                    <p class="mb-3">
+                        Alta demanda de seguridad y herramientas cloud.
+                    </p>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Sanidad y farmacéutica</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Finanzas y banca</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Administración pública</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Retail y logística</li>
+                    </ul>
+                    <div class="potential-box mt-4">
+                        <strong class="text-warning">Demanda:</strong>
+                        <p class="mb-0 small">Regulación GDPR y seguridad</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN CARACTERÍSTICAS TÉCNICAS -->
+<section id="caracteristicas" class="py-5 section-features">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5 text-white animate__animated animate__fadeInUp" data-animate>
+            Características Técnicas
+        </h2>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInLeft" data-animate>
+                    <div class="feature-number">01</div>
+                    <h4 class="fw-bold mb-3 text-white">Automatización Completa</h4>
+                    <p class="text-white">
+                        Gestión automática de usuarios LDAP/Kerberos, copias de seguridad programadas y monitorización 24/7 con Zabbix.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInRight" data-animate>
+                    <div class="feature-number">02</div>
+                    <h4 class="fw-bold mb-3 text-white">Seguridad Avanzada</h4>
+                    <p class="text-white">
+                        2FA con Google Authenticator, auditorías automáticas de accesos SSH/SMB, y cumplimiento GDPR.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInLeft animate__delay-0-2s" data-animate>
+                    <div class="feature-number">03</div>
+                    <h4 class="fw-bold mb-3 text-white">Infraestructura Escalable</h4>
+                    <p class="text-white">
+                        Soporta entornos híbridos cloud + on-premise, con paquetes plug-and-play para fácil adopción.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInRight animate__delay-0-2s" data-animate>
+                    <div class="feature-number">04</div>
+                    <h4 class="fw-bold mb-3 text-white">Alertas en Tiempo Real</h4>
+                    <p class="text-white">
+                        Bots de Telegram para notificaciones instantáneas, reportes automáticos y dashboards interactivos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN ÁREAS DE CRECIMIENTO -->
+<section id="areas-crecimiento" class="py-5 section-light">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5 animate__animated animate__fadeInUp" data-animate>
+            Áreas de Crecimiento
+        </h2>
+        <p class="lead text-center mb-5 animate__animated animate__fadeInUp animate__delay-0-2s">
+            Como empresa en crecimiento, en SIGPAU estamos aprendiendo de soluciones líderes como Casdoor para mejorar nuestra oferta y ofrecer la mejor experiencia a PYMEs y entornos educativos.
+        </p>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInLeft" data-animate>
+                    <h4 class="fw-bold mb-3">Experiencia de Usuario</h4>
+                    <p>
+                        Estamos trabajando en hacer nuestra interfaz más intuitiva y visualmente atractiva, inspirándonos en las mejores prácticas del mercado.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInRight" data-animate>
+                    <h4 class="fw-bold mb-3">Modelos de Suscripción</h4>
+                    <p>
+                        Planeamos incorporar herramientas para gestionar planes de suscripción, ofreciendo mayor flexibilidad a nuestros clientes.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInLeft animate__delay-0-2s" data-animate>
+                    <h4 class="fw-bold mb-3">Optimización de Recursos</h4>
+                    <p>
+                        Buscamos mejorar la eficiencia de nuestra solución para que sea más ligera y optimizada para PYMEs.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInRight animate__delay-0-2s" data-animate>
+                    <h4 class="fw-bold mb-3">Compatibilidad con Estándares</h4>
+                    <p>
+                        Exploramos integrar más protocolos (como OAuth 2.0 y SAML) para facilitar la conexión con otras aplicaciones.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <p class="text-center mt-4 animate__animated animate__fadeInUp animate__delay-0-4s">
+            ¡En SIGPAU, nuestro compromiso es seguir creciendo para ofrecerte la mejor solución open-source!
+        </p>
+    </div>
+</section>
+
+<!-- SECCIÓN NUESTRO PROCESO DE IMPLEMENTACIÓN -->
+<section id="proceso-implementacion" class="py-5 section-dark">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5 text-white animate__animated animate__fadeInUp" data-animate>
+            Nuestro Proceso de Implementación
+        </h2>
+        <p class="lead text-center mb-5 text-white animate__animated animate__fadeInUp animate__delay-0-2s">
+            En SIGPAU, seguimos un proceso estructurado en cuatro fases para garantizar una solución de red segura, eficiente y adaptada a tus necesidades.
+        </p>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInLeft" data-animate>
+                    <div class="feature-number">01</div>
+                    <h4 class="fw-bold mb-3 text-white">Diseño y Core de Red</h4>
+                    <p class="text-white">
+                        Creamos una arquitectura de red robusta con VLANs y gateways OpenWRT, implementamos autenticación centralizada (LDAP/Kerberos) y configuramos un servidor DNS local para un rendimiento óptimo.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInRight" data-animate>
+                    <div class="feature-number">02</div>
+                    <h4 class="fw-bold mb-3 text-white">Servicios Internos y Seguridad</h4>
+                    <p class="text-white">
+                        Configuramos una base de datos SQL y una web interna restringida, habilitamos compartición segura con Samba y fortalecemos los accesos con autenticación de doble factor (2FA).
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInLeft animate__delay-0-2s" data-animate>
+                    <div class="feature-number">03</div>
+                    <h4 class="fw-bold mb-3 text-white">Automatización y Monitorización</h4>
+                    <p class="text-white">
+                        Automatizamos copias de seguridad, monitorizamos la red con Zabbix y LibreNMS/The Dude, implementamos alertas vía Telegram y desarrollamos scripts para restauración rápida de servicios.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInRight animate__delay-0-2s" data-animate>
+                    <div class="feature-number">04</div>
+                    <h4 class="fw-bold mb-3 text-white">Pruebas y Entrega</h4>
+                    <p class="text-white">
+                        Realizamos pruebas exhaustivas, optimizamos el sistema, proporcionamos documentación detallada y formación, y entregamos la solución lista para usar.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN NUESTRO COMPROMISO NORMATIVO -->
+<section id="compromiso-normativo" class="py-5 section-light">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5 animate__animated animate__fadeInUp" data-animate>
+            Nuestro Compromiso Normativo
+        </h2>
+        <p class="lead text-center mb-5 animate__animated animate__fadeInUp animate__delay-0-2s">
+            En SIGPAU, nuestro compromiso con el cumplimiento normativo garantiza la seguridad y confianza en la gestión de redes y servicios IT para PYMEs y entornos educativos.
+        </p>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInLeft" data-animate>
+                    <h4 class="fw-bold mb-3">Cumplimiento Fiscal</h4>
+                    <p>
+                        Estamos registrados en el IAE y optimizamos nuestra estructura fiscal, analizando exenciones de IVA para ofrecer precios competitivos.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInRight" data-animate>
+                    <h4 class="fw-bold mb-3">Normativas Laborales</h4>
+                    <p>
+                        Cumplimos con las leyes laborales y nos adherimos al convenio colectivo del sector tecnológico, asegurando un entorno laboral ético.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInLeft animate__delay-0-2s" data-animate>
+                    <h4 class="fw-bold mb-3">Prevención de Riesgos Laborales</h4>
+                    <p>
+                        Implementamos medidas proactivas de PRL y CAE para garantizar un entorno de trabajo seguro para nuestro equipo y colaboradores.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInRight animate__delay-0-2s" data-animate>
+                    <h4 class="fw-bold mb-3">Protección de Datos (RGPD)</h4>
+                    <p>
+                        Cumplimos estrictamente el RGPD con 2FA, auditorías automáticas de accesos SSH/SMB y informes compatibles, protegiendo los datos personales.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-item animate__animated animate__fadeInLeft animate__delay-0-4s" data-animate>
+                    <h4 class="fw-bold mb-3">Estándares de Seguridad IT</h4>
+                    <p>
+                        Nos alineamos con estándares de ciberseguridad avanzados, integrando 2FA, auditorías automáticas y soporte local GDPR.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <p class="text-center mt-4 animate__animated animate__fadeInUp animate__delay-0-4s">
+            ¡En SIGPAU, cumplimos las normativas y evolucionamos constantemente para inspirar confianza y maximizar el valor de tu operación!
+        </p>
+    </div>
+</section>
+
+
+<!-- SECCIÓN RESEÑAS -->
+<section id="reviews" class="py-5 section-light">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5 animate__animated animate__fadeInUp" data-animate>
+            Reseñas de Usuarios
+        </h2>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <?php if (isset($_SESSION['username'])): ?>
+                    <div class="card p-4 mb-5 shadow-sm">
+                        <h4 class="mb-3">Deja tu reseña, <?php echo htmlspecialchars($_SESSION['username']); ?></h4>
+                        <form method="POST">
+                            <textarea name="review_content" class="form-control mb-3" rows="3" placeholder="Cuéntanos tu experiencia..." required></textarea>
+                            <button type="submit" name="submit_review" class="btn btn-primary">Enviar Reseña</button>
+                        </form>
+                    </div>
+                <?php else: ?>
+                    <div class="alert alert-info text-center mb-5">
+                        <p class="mb-0">Para dejar una reseña, por favor <a href="login.php" class="fw-bold">inicia sesión</a>.</p>
+                    </div>
+                <?php endif; ?>
+
+                <div class="reviews-list">
+                    <?php if (empty($reviews)): ?>
+                        <p class="text-center text-muted">Aún no hay reseñas. ¡Sé el primero en compartir tu opinión!</p>
+                    <?php else: ?>
+                        <?php foreach ($reviews as $review): ?>
+                            <div class="card p-3 mb-3 shadow-sm border-0 animate__animated animate__fadeInUp">
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="fw-bold text-primary mb-1"><?php echo htmlspecialchars($review['username']); ?></h5>
+                                    <small class="text-muted"><?php echo $review['created_at']; ?></small>
+                                </div>
+                                <p class="mb-0 mt-2"><?php echo nl2br(htmlspecialchars($review['content'])); ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN CTA -->
+<section id="cta" class="py-5 section-cta">
+    <div class="container text-center">
+        <h2 class="display-5 fw-bold mb-4 text-white animate__animated animate__fadeInDown" data-animate>
+            ¿Listo para Transformar tu Infraestructura IT?
+        </h2>
+        <p class="lead mb-5 text-white animate__animated animate__fadeInUp" data-animate>
+            Descubre cómo SIGPAU puede mejorar la seguridad y eficiencia de tu organización.
+        </p>
+        <div class="animate__animated animate__fadeInUp animate__delay-0-2s" data-animate>
+            <a href="mailto:info@sigpau.cat" class="btn btn-light btn-lg me-3 btn-glow">Enviar Mensaje</a>
+            <a href="mailto:demo@sigpau.cat?subject=Solicitar%20Demo" class="btn btn-outline-light btn-lg">Solicitar Demo</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-custom py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-4 mb-4 mb-md-0">
+                <h5 class="fw-bold mb-3 text-white">Área Geográfica Concreta</h5>
+                <p class="text-white">
+                    El proyecto SIGPAU se enfocará en el mercado de toda Cataluña, ya que presenta un ecosistema empresarial dinámico y una alta concentración de PYMEs, que son el principal colectivo objetivo de SIGPAU.
+                </p>
+            </div>
+            <div class="col-md-4 mb-4 mb-md-0">
+                <h5 class="fw-bold mb-3 text-white">Enlaces Rápidos</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#home" class="text-decoration-none text-white">Inicio</a></li>
+                    <li><a href="#solucion" class="text-decoration-none text-white">Solución</a></li>
+                    <li><a href="#servicios" class="text-decoration-none text-white">Servicios</a></li>
+                    <li><a href="#reviews" class="text-decoration-none text-white">Reseñas</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5 class="fw-bold mb-3 text-white">Síguenos</h5>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="border-white-10">
+        <div class="text-center small text-white">
+            <p>&copy; 2025 SIGPAU. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script_improved.js"></script>
+</body>
+</html>
