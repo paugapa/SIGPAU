@@ -640,7 +640,7 @@ if ($pdo) {
         <div class="row g-4 justify-content-center">
             <!-- Basic Setup -->
             <div class="col-lg-4 col-md-6">
-                <div class="pricing-card animate__animated animate__fadeInUp" data-animate>
+                <div class="pricing-card dark animate__animated animate__fadeInUp" data-animate>
                     <div class="pricing-header">
                         <h4 class="pricing-title">Núcleo SIGPAU</h4>
                         <div class="pricing-price">299€<span>/setup</span></div>
@@ -657,7 +657,7 @@ if ($pdo) {
             </div>
             <!-- Advanced Setup -->
             <div class="col-lg-4 col-md-6">
-                <div class="pricing-card featured animate__animated animate__fadeInUp animate__delay-0-2s" data-animate>
+                <div class="pricing-card dark featured animate__animated animate__fadeInUp animate__delay-0-2s" data-animate>
                     <div class="pricing-header">
                         <h4 class="pricing-title">SIGPAU Avanzado</h4>
                         <div class="pricing-price">599€<span>/setup</span></div>
@@ -675,7 +675,7 @@ if ($pdo) {
             </div>
             <!-- Enterprise Setup -->
             <div class="col-lg-4 col-md-6">
-                <div class="pricing-card animate__animated animate__fadeInUp animate__delay-0-4s" data-animate>
+                <div class="pricing-card dark animate__animated animate__fadeInUp animate__delay-0-4s" data-animate>
                     <div class="pricing-header">
                         <h4 class="pricing-title">SIGPAU Enterprise</h4>
                         <div class="pricing-price">999€<span>/setup</span></div>
@@ -696,8 +696,9 @@ if ($pdo) {
 </section>
 
 <!-- SECCIÓN PLANES DE MANTENIMIENTO -->
-<section id="mantenimiento" class="py-5 section-light">
-    <div class="container">
+<section id="mantenimiento" class="py-5 section-light position-relative overflow-hidden">
+    <div class="maintenance-decoration"></div>
+    <div class="container position-relative z-2">
         <div class="text-center mb-5">
             <h2 class="display-5 fw-bold mb-3 animate__animated animate__fadeInUp" data-animate>
                 Planes de Mantenimiento
@@ -709,68 +710,68 @@ if ($pdo) {
         <div class="row g-4 justify-content-center">
             <!-- Mantenimiento Básico -->
             <div class="col-lg-4 col-md-6">
-                <div class="pricing-card animate__animated animate__fadeInUp" data-animate style="background: rgba(10, 14, 39, 0.03); border-color: rgba(10, 14, 39, 0.1);">
+                <div class="pricing-card light animate__animated animate__fadeInUp" data-animate>
                     <div class="maintenance-badge">SOPORTE BÁSICO</div>
                     <div class="pricing-header">
-                        <h4 class="pricing-title" style="color: var(--dark-bg);">Esencial</h4>
-                        <div class="pricing-price">29€<span style="color: var(--dark-bg);">/mes</span></div>
+                        <h4 class="pricing-title">Esencial</h4>
+                        <div class="pricing-price">29€<span>/mes</span></div>
                     </div>
                     <ul class="pricing-features">
-                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Actualizaciones de Seguridad</li>
-                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Revisión de Backups Mensual</li>
-                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Soporte vía Email (48h)</li>
+                        <li><i class="fas fa-check"></i> Actualizaciones de Seguridad</li>
+                        <li><i class="fas fa-check"></i> Revisión de Backups Mensual</li>
+                        <li><i class="fas fa-check"></i> Soporte vía Email (48h)</li>
                     </ul>
                     <div class="mt-auto">
                         <p class="small text-center mb-2"><strong>Descuentos:</strong></p>
                         <ul class="list-unstyled small text-center">
-                            <li>6 Meses: <strong>10% OFF</strong> <span class="discount-tag">~157€</span></li>
-                            <li>1 Año: <strong>20% OFF</strong> <span class="discount-tag">~278€</span></li>
+                            <li>6 Meses: 10% OFF <span class="discount-tag">~157€</span></li>
+                            <li>1 Año: 20% OFF <span class="discount-tag">~278€</span></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <!-- Mantenimiento Premium -->
             <div class="col-lg-4 col-md-6">
-                <div class="pricing-card featured animate__animated animate__fadeInUp animate__delay-0-2s" data-animate style="background: rgba(10, 14, 39, 0.05); border-color: var(--primary-color);">
+                <div class="pricing-card light featured animate__animated animate__fadeInUp animate__delay-0-2s" data-animate>
                     <div class="maintenance-badge">MÁS POPULAR</div>
                     <div class="pricing-header">
-                        <h4 class="pricing-title" style="color: var(--dark-bg);">Premium</h4>
-                        <div class="pricing-price">59€<span style="color: var(--dark-bg);">/mes</span></div>
+                        <h4 class="pricing-title">Premium</h4>
+                        <div class="pricing-price">59€<span>/mes</span></div>
                     </div>
                     <ul class="pricing-features">
-                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Monitorización Activa 24/7</li>
-                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Revisión de Backups Diaria</li>
-                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Soporte Prioritario (24h)</li>
-                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> 1 Intervención Remota Incluida</li>
+                        <li><i class="fas fa-check"></i> Monitorización Activa 24/7</li>
+                        <li><i class="fas fa-check"></i> Revisión de Backups Diaria</li>
+                        <li><i class="fas fa-check"></i> Soporte Prioritario (24h)</li>
+                        <li><i class="fas fa-check"></i> 1 Intervención Remota Incluida</li>
                     </ul>
                     <div class="mt-auto">
                         <p class="small text-center mb-2"><strong>Descuentos:</strong></p>
                         <ul class="list-unstyled small text-center">
-                            <li>6 Meses: <strong>10% OFF</strong> <span class="discount-tag">~319€</span></li>
-                            <li>1 Año: <strong>20% OFF</strong> <span class="discount-tag">~566€</span></li>
+                            <li>6 Meses: 10% OFF <span class="discount-tag">~319€</span></li>
+                            <li>1 Año: 20% OFF <span class="discount-tag">~566€</span></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <!-- Mantenimiento Enterprise -->
             <div class="col-lg-4 col-md-6">
-                <div class="pricing-card animate__animated animate__fadeInUp animate__delay-0-4s" data-animate style="background: rgba(10, 14, 39, 0.03); border-color: rgba(10, 14, 39, 0.1);">
+                <div class="pricing-card light animate__animated animate__fadeInUp animate__delay-0-4s" data-animate>
                     <div class="maintenance-badge">CRITICAL CARE</div>
                     <div class="pricing-header">
-                        <h4 class="pricing-title" style="color: var(--dark-bg);">Inmediato</h4>
-                        <div class="pricing-price">99€<span style="color: var(--dark-bg);">/mes</span></div>
+                        <h4 class="pricing-title">Inmediato</h4>
+                        <div class="pricing-price">99€<span>/mes</span></div>
                     </div>
                     <ul class="pricing-features">
-                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Gestión de Alertas Críticas</li>
-                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Auditoría Mensual de Seguridad</li>
-                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Soporte 24/7 Dedicado</li>
-                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Intervenciones Ilimitadas</li>
+                        <li><i class="fas fa-check"></i> Gestión de Alertas Críticas</li>
+                        <li><i class="fas fa-check"></i> Auditoría Mensual de Seguridad</li>
+                        <li><i class="fas fa-check"></i> Soporte 24/7 Dedicado</li>
+                        <li><i class="fas fa-check"></i> Intervenciones Ilimitadas</li>
                     </ul>
                     <div class="mt-auto">
                         <p class="small text-center mb-2"><strong>Descuentos:</strong></p>
                         <ul class="list-unstyled small text-center">
-                            <li>6 Meses: <strong>10% OFF</strong> <span class="discount-tag">~535€</span></li>
-                            <li>1 Año: <strong>20% OFF</strong> <span class="discount-tag">~950€</span></li>
+                            <li>6 Meses: 10% OFF <span class="discount-tag">~535€</span></li>
+                            <li>1 Año: 20% OFF <span class="discount-tag">~950€</span></li>
                         </ul>
                     </div>
                 </div>
