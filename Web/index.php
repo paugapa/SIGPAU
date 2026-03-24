@@ -54,6 +54,7 @@ if ($pdo) {
                 <li class="nav-item"><a class="nav-link" href="#mercado">Mercado</a></li>
                 <li class="nav-item"><a class="nav-link" href="#demanda">Demanda</a></li>
                 <li class="nav-item"><a class="nav-link" href="#caracteristicas">Características Técnicas</a></li>
+                <li class="nav-item"><a class="nav-link" href="#planes">Planes</a></li>
                 <li class="nav-item"><a class="nav-link" href="#reviews">Reseñas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#cta">Contacto</a></li>
                 <?php if (isset($_SESSION['username'])): ?>
@@ -625,7 +626,158 @@ if ($pdo) {
         </p>
     </div>
 </section>
+<!-- SECCIÓN PLANES DE IMPLEMENTACIÓN -->
+<section id="planes" class="py-5 section-dark">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3 text-white animate__animated animate__fadeInUp" data-animate>
+                Planes de Implementación
+            </h2>
+            <p class="lead text-white animate__animated animate__fadeInUp animate__delay-0-2s">
+                Soluciones de despliegue único para poner en marcha tu infraestructura
+            </p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <!-- Basic Setup -->
+            <div class="col-lg-4 col-md-6">
+                <div class="pricing-card animate__animated animate__fadeInUp" data-animate>
+                    <div class="pricing-header">
+                        <h4 class="pricing-title">Núcleo SIGPAU</h4>
+                        <div class="pricing-price">299€<span>/setup</span></div>
+                        <p class="text-white-50">Ideal para pequeñas oficinas</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Instalación LDAP Centralizada</li>
+                        <li><i class="fas fa-check"></i> Configuración Base de Red</li>
+                        <li><i class="fas fa-check"></i> Segmentación 1 VLAN</li>
+                        <li><i class="fas fa-check"></i> Script de Backup Semanal</li>
+                    </ul>
+                    <a href="#cta" class="btn btn-outline-primary w-100">Solicitar Implementación</a>
+                </div>
+            </div>
+            <!-- Advanced Setup -->
+            <div class="col-lg-4 col-md-6">
+                <div class="pricing-card featured animate__animated animate__fadeInUp animate__delay-0-2s" data-animate>
+                    <div class="pricing-header">
+                        <h4 class="pricing-title">SIGPAU Avanzado</h4>
+                        <div class="pricing-price">599€<span>/setup</span></div>
+                        <p class="text-white-50">Ciberseguridad y Control Total</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Todo lo del Plan Núcleo</li>
+                        <li><i class="fas fa-check"></i> Autenticación 2FA (Google)</li>
+                        <li><i class="fas fa-check"></i> Monitorización Zabbix 24/7</li>
+                        <li><i class="fas fa-check"></i> Segmentación hasta 3 VLANs</li>
+                        <li><i class="fas fa-check"></i> Backup Diario Automatizado</li>
+                    </ul>
+                    <a href="#cta" class="btn btn-primary w-100">Solicitar Implementación</a>
+                </div>
+            </div>
+            <!-- Enterprise Setup -->
+            <div class="col-lg-4 col-md-6">
+                <div class="pricing-card animate__animated animate__fadeInUp animate__delay-0-4s" data-animate>
+                    <div class="pricing-header">
+                        <h4 class="pricing-title">SIGPAU Enterprise</h4>
+                        <div class="pricing-price">999€<span>/setup</span></div>
+                        <p class="text-white-50">Máximo Rendimiento y Soporte</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Todo lo del Plan Avanzado</li>
+                        <li><i class="fas fa-check"></i> Bot de Telegram para Alertas</li>
+                        <li><i class="fas fa-check"></i> VPN Gestionada (WireGuard)</li>
+                        <li><i class="fas fa-check"></i> Hardening de Seguridad</li>
+                        <li><i class="fas fa-check"></i> Formación para el Personal</li>
+                    </ul>
+                    <a href="#cta" class="btn btn-outline-primary w-100">Solicitar Implementación</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
+<!-- SECCIÓN PLANES DE MANTENIMIENTO -->
+<section id="mantenimiento" class="py-5 section-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3 animate__animated animate__fadeInUp" data-animate>
+                Planes de Mantenimiento
+            </h2>
+            <p class="lead animate__animated animate__fadeInUp animate__delay-0-2s">
+                Garantiza la continuidad y seguridad de tu infraestructura IT
+            </p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <!-- Mantenimiento Básico -->
+            <div class="col-lg-4 col-md-6">
+                <div class="pricing-card animate__animated animate__fadeInUp" data-animate style="background: rgba(10, 14, 39, 0.03); border-color: rgba(10, 14, 39, 0.1);">
+                    <div class="maintenance-badge">SOPORTE BÁSICO</div>
+                    <div class="pricing-header">
+                        <h4 class="pricing-title" style="color: var(--dark-bg);">Esencial</h4>
+                        <div class="pricing-price">29€<span style="color: var(--dark-bg);">/mes</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Actualizaciones de Seguridad</li>
+                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Revisión de Backups Mensual</li>
+                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Soporte vía Email (48h)</li>
+                    </ul>
+                    <div class="mt-auto">
+                        <p class="small text-center mb-2"><strong>Descuentos:</strong></p>
+                        <ul class="list-unstyled small text-center">
+                            <li>6 Meses: <strong>10% OFF</strong> <span class="discount-tag">~157€</span></li>
+                            <li>1 Año: <strong>20% OFF</strong> <span class="discount-tag">~278€</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Mantenimiento Premium -->
+            <div class="col-lg-4 col-md-6">
+                <div class="pricing-card featured animate__animated animate__fadeInUp animate__delay-0-2s" data-animate style="background: rgba(10, 14, 39, 0.05); border-color: var(--primary-color);">
+                    <div class="maintenance-badge">MÁS POPULAR</div>
+                    <div class="pricing-header">
+                        <h4 class="pricing-title" style="color: var(--dark-bg);">Premium</h4>
+                        <div class="pricing-price">59€<span style="color: var(--dark-bg);">/mes</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Monitorización Activa 24/7</li>
+                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Revisión de Backups Diaria</li>
+                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Soporte Prioritario (24h)</li>
+                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> 1 Intervención Remota Incluida</li>
+                    </ul>
+                    <div class="mt-auto">
+                        <p class="small text-center mb-2"><strong>Descuentos:</strong></p>
+                        <ul class="list-unstyled small text-center">
+                            <li>6 Meses: <strong>10% OFF</strong> <span class="discount-tag">~319€</span></li>
+                            <li>1 Año: <strong>20% OFF</strong> <span class="discount-tag">~566€</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Mantenimiento Enterprise -->
+            <div class="col-lg-4 col-md-6">
+                <div class="pricing-card animate__animated animate__fadeInUp animate__delay-0-4s" data-animate style="background: rgba(10, 14, 39, 0.03); border-color: rgba(10, 14, 39, 0.1);">
+                    <div class="maintenance-badge">CRITICAL CARE</div>
+                    <div class="pricing-header">
+                        <h4 class="pricing-title" style="color: var(--dark-bg);">Inmediato</h4>
+                        <div class="pricing-price">99€<span style="color: var(--dark-bg);">/mes</span></div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Gestión de Alertas Críticas</li>
+                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Auditoría Mensual de Seguridad</li>
+                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Soporte 24/7 Dedicado</li>
+                        <li style="color: var(--dark-bg);"><i class="fas fa-check"></i> Intervenciones Ilimitadas</li>
+                    </ul>
+                    <div class="mt-auto">
+                        <p class="small text-center mb-2"><strong>Descuentos:</strong></p>
+                        <ul class="list-unstyled small text-center">
+                            <li>6 Meses: <strong>10% OFF</strong> <span class="discount-tag">~535€</span></li>
+                            <li>1 Año: <strong>20% OFF</strong> <span class="discount-tag">~950€</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- SECCIÓN RESEÑAS -->
 <section id="reviews" class="py-5 section-light">
@@ -702,6 +854,7 @@ if ($pdo) {
                     <li><a href="#home" class="text-decoration-none text-white">Inicio</a></li>
                     <li><a href="#solucion" class="text-decoration-none text-white">Solución</a></li>
                     <li><a href="#servicios" class="text-decoration-none text-white">Servicios</a></li>
+                    <li><a href="#planes" class="text-decoration-none text-white">Planes</a></li>
                     <li><a href="#reviews" class="text-decoration-none text-white">Reseñas</a></li>
                 </ul>
             </div>

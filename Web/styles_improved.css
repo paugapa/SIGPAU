@@ -746,17 +746,36 @@ body {
 .video-container {
     position: relative;
     padding-top: 56.25%; /* 16:9 Aspect Ratio */
-    border-radius: 15px;
+    border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, var(--dark-bg), #1a1f3a);
-    border: 3px solid var(--primary-color);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #000;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.video-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    z-index: -1;
+    opacity: 0.3;
+    border-radius: 26px;
+    transition: opacity 0.5s ease;
 }
 
 .video-container:hover {
-    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
-    transform: translateY(-5px);
+    box-shadow: 0 30px 60px rgba(0, 212, 255, 0.3);
+    transform: translateY(-5px) scale(1.01);
+    border-color: var(--primary-color);
+}
+
+.video-container:hover::before {
+    opacity: 0.8;
 }
 
 .video-placeholder {
@@ -768,13 +787,123 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--dark-bg);
-    color: var(--text-light);
-    font-size: 1.2rem;
 }
 
 .video-placeholder iframe {
     width: 100%;
     height: 100%;
     border: none;
+}
+
+/* ============================================
+   PRICING & MAINTENANCE STYLES
+   ============================================ */
+
+.pricing-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 40px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card:hover {
+    transform: translateY(-15px);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: var(--primary-color);
+    box-shadow: 0 20px 50px rgba(0, 212, 255, 0.2);
+}
+
+.pricing-card.featured {
+    border: 2px solid var(--primary-color);
+    background: rgba(0, 212, 255, 0.04);
+}
+
+.pricing-card.featured::after {
+    content: 'RECOMENDADO';
+    position: absolute;
+    top: 20px;
+    right: -35px;
+    background: var(--primary-color);
+    color: var(--dark-bg);
+    padding: 5px 40px;
+    transform: rotate(45deg);
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.pricing-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--text-light);
+}
+
+.pricing-price {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    line-height: 1;
+}
+
+.pricing-price span {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    opacity: 0.6;
+    font-weight: 400;
+}
+
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 35px;
+    flex-grow: 1;
+}
+
+.pricing-features li {
+    margin-bottom: 15px;
+    color: var(--text-light);
+    display: flex;
+    align-items: flex-start;
+    font-size: 0.95rem;
+}
+
+.pricing-features li i {
+    color: var(--primary-color);
+    margin-right: 12px;
+    margin-top: 5px;
+    font-size: 0.9rem;
+}
+
+.maintenance-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.discount-tag {
+    color: var(--secondary-color);
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-left: 5px;
 }
