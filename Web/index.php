@@ -844,8 +844,8 @@ if ($pdo) {
             Descubre cómo SIGPAU puede mejorar la seguridad y eficiencia de tu organización.
         </p>
         <div class="animate__animated animate__fadeInUp animate__delay-0-2s" data-animate>
-            <a href="mailto:info@sigpau.cat" class="btn btn-light btn-lg me-3 btn-glow">Enviar Mensaje</a>
-            <a href="mailto:demo@sigpau.cat?subject=Solicitar%20Demo" class="btn btn-outline-light btn-lg">Solicitar Demo</a>
+            <a href="mailto:pau.gamez.pacheco@ieselcalamot.com" class="btn btn-light btn-lg me-3 btn-glow">Enviar Mensaje</a>
+            <a href="mailto:pau.gamez.pacheco@ieselcalamot.com?subject=Solicitar%20Demo" class="btn btn-outline-light btn-lg">Solicitar Demo</a>
         </div>
     </div>
 </section>
