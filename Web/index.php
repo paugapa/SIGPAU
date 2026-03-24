@@ -654,7 +654,7 @@ if ($pdo) {
                 <div class="pricing-card dark animate__animated animate__fadeInUp" data-animate>
                     <div class="pricing-header">
                         <h4 class="pricing-title">Núcleo SIGPAU</h4>
-                        <div class="pricing-price">299€<span>/setup</span></div>
+                        <div class="pricing-price">699€<span>/setup</span></div>
                         <p class="text-white-50">Ideal para pequeñas oficinas</p>
                     </div>
                     <ul class="pricing-features">
@@ -671,7 +671,7 @@ if ($pdo) {
                 <div class="pricing-card dark featured animate__animated animate__fadeInUp animate__delay-0-2s" data-animate>
                     <div class="pricing-header">
                         <h4 class="pricing-title">SIGPAU Avanzado</h4>
-                        <div class="pricing-price">599€<span>/setup</span></div>
+                        <div class="pricing-price">899€<span>/setup</span></div>
                         <p class="text-white-50">Ciberseguridad y Control Total</p>
                     </div>
                     <ul class="pricing-features">
@@ -689,7 +689,7 @@ if ($pdo) {
                 <div class="pricing-card dark animate__animated animate__fadeInUp animate__delay-0-4s" data-animate>
                     <div class="pricing-header">
                         <h4 class="pricing-title">SIGPAU Enterprise</h4>
-                        <div class="pricing-price">999€<span>/setup</span></div>
+                        <div class="pricing-price">1499€<span>/setup</span></div>
                         <p class="text-white-50">Máximo Rendimiento y Soporte</p>
                     </div>
                     <ul class="pricing-features">
@@ -725,7 +725,7 @@ if ($pdo) {
                     <div class="maintenance-badge">SOPORTE BÁSICO</div>
                     <div class="pricing-header">
                         <h4 class="pricing-title">Esencial</h4>
-                        <div class="pricing-price">29€<span>/mes</span></div>
+                        <div class="pricing-price">49€<span>/mes</span></div>
                     </div>
                     <ul class="pricing-features">
                         <li><i class="fas fa-check"></i> Actualizaciones de Seguridad</li>
@@ -735,8 +735,8 @@ if ($pdo) {
                     <div class="mt-auto">
                         <p class="small text-center mb-2"><strong>Descuentos:</strong></p>
                         <ul class="list-unstyled small text-center">
-                            <li>6 Meses: 10% OFF <span class="discount-tag">~157€</span></li>
-                            <li>1 Año: 20% OFF <span class="discount-tag">~278€</span></li>
+                            <li>6 Meses: 10% OFF <span class="discount-tag">~265€</span></li>
+                            <li>1 Año: 20% OFF <span class="discount-tag">~470€</span></li>
                         </ul>
                     </div>
                 </div>
@@ -747,7 +747,7 @@ if ($pdo) {
                     <div class="maintenance-badge">MÁS POPULAR</div>
                     <div class="pricing-header">
                         <h4 class="pricing-title">Premium</h4>
-                        <div class="pricing-price">59€<span>/mes</span></div>
+                        <div class="pricing-price">199€<span>/mes</span></div>
                     </div>
                     <ul class="pricing-features">
                         <li><i class="fas fa-check"></i> Monitorización Activa 24/7</li>
@@ -758,8 +758,8 @@ if ($pdo) {
                     <div class="mt-auto">
                         <p class="small text-center mb-2"><strong>Descuentos:</strong></p>
                         <ul class="list-unstyled small text-center">
-                            <li>6 Meses: 10% OFF <span class="discount-tag">~319€</span></li>
-                            <li>1 Año: 20% OFF <span class="discount-tag">~566€</span></li>
+                            <li>6 Meses: 10% OFF <span class="discount-tag">~1075€</span></li>
+                            <li>1 Año: 20% OFF <span class="discount-tag">~1910€</span></li>
                         </ul>
                     </div>
                 </div>
@@ -770,7 +770,7 @@ if ($pdo) {
                     <div class="maintenance-badge">CRITICAL CARE</div>
                     <div class="pricing-header">
                         <h4 class="pricing-title">Inmediato</h4>
-                        <div class="pricing-price">99€<span>/mes</span></div>
+                        <div class="pricing-price">499€<span>/mes</span></div>
                     </div>
                     <ul class="pricing-features">
                         <li><i class="fas fa-check"></i> Gestión de Alertas Críticas</li>
@@ -781,8 +781,8 @@ if ($pdo) {
                     <div class="mt-auto">
                         <p class="small text-center mb-2"><strong>Descuentos:</strong></p>
                         <ul class="list-unstyled small text-center">
-                            <li>6 Meses: 10% OFF <span class="discount-tag">~535€</span></li>
-                            <li>1 Año: 20% OFF <span class="discount-tag">~950€</span></li>
+                            <li>6 Meses: 10% OFF <span class="discount-tag">~2695€</span></li>
+                            <li>1 Año: 20% OFF <span class="discount-tag">~4790€</span></li>
                         </ul>
                     </div>
                 </div>
