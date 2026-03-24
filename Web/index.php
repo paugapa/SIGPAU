@@ -115,18 +115,29 @@ if ($pdo) {
                 </div>
             </div>
           <div class="col-lg-6">
-  <div class="video-container animate__animated animate__fadeInRight" data-animate>
-    <iframe 
-      width="100%" 
-      height="315" 
-      src="https://www.youtube.com/embed/54FmNlleHLY" 
-      title="YouTube video player" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen>
-    </iframe>
-  </div>
-</div>
+            <div class="video-window animate__animated animate__fadeInRight" data-animate>
+                <div class="video-header">
+                    <div class="window-buttons">
+                        <div class="window-button btn-red"></div>
+                        <div class="window-button btn-yellow"></div>
+                        <div class="window-button btn-green"></div>
+                    </div>
+                    <div class="window-address">sigpau.cat/infraestructura</div>
+                </div>
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        <iframe 
+                          width="100%" 
+                          height="315" 
+                          src="https://www.youtube.com/embed/54FmNlleHLY" 
+                          title="YouTube video player" 
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                          allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+          </div>
             </div>
         </div>
     </div>
@@ -684,9 +695,9 @@ if ($pdo) {
                     <ul class="pricing-features">
                         <li><i class="fas fa-check"></i> Todo lo del Plan Avanzado</li>
                         <li><i class="fas fa-check"></i> Bot de Telegram para Alertas</li>
-                        <li><i class="fas fa-check"></i> VPN Gestionada (WireGuard)</li>
-                        <li><i class="fas fa-check"></i> Hardening de Seguridad</li>
+                        <li><i class="fas fa-check"></i> Hardening de Seguridad IT</li>
                         <li><i class="fas fa-check"></i> Formación para el Personal</li>
+                        <li><i class="fas fa-check"></i> Auditoría de Red Completa</li>
                     </ul>
                     <a href="#cta" class="btn btn-outline-primary w-100">Solicitar Implementación</a>
                 </div>
